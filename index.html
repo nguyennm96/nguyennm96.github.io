@@ -4,273 +4,186 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Nguyen Nguyen – Backend Engineer</title>
-  <meta name="description" content="Nguyen Nguyen – Backend Engineer specializing in Golang, microservices, PostgreSQL, MongoDB, Redis, Kubernetes, AWS. Building scalable, reliable systems." />
-  <meta property="og:title" content="Nguyen Nguyen – Backend Engineer" />
-  <meta property="og:description" content="7+ years building scalable, high-performance systems. Ahamove Assistant Team Lead. Golang, Microservices, PostgreSQL, MongoDB, Redis, Kubernetes, AWS." />
-  <meta property="og:type" content="website" />
-  <meta property="og:image" content="https://avatars.githubusercontent.com/u/000000?v=4" />
+  <meta name="description" content="Backend Engineer focused on scalable systems, APIs, reliability. Golang · PostgreSQL · MongoDB · Redis · Kubernetes · AWS." />
   <style>
-    :root {
-      --bg: #0b0d10;
-      --panel: #111418;
-      --text: #e6edf3;
-      --muted: #a9b1ba;
-      --primary: #61dafb;
-      --accent: #7ee787;
-      --card: #0f1216;
-      --border: #1f2329;
-      --shadow: 0 10px 30px rgba(0,0,0,.35);
+    /* ===== Sidebar Pro: clean, hiring‑manager friendly ===== */
+    :root{
+      --bg:#0a0c10; --ink:#e6edf3; --muted:#9aa4b2; --line:#1f232a; --panel:#0f1318; --panel2:#0c1015; --brand:#3dc9ff; --accent:#8bdf9b;
+      --radius:14px; --shadow:0 10px 24px rgba(0,0,0,.35);
     }
-    @media (prefers-color-scheme: light) {
-      :root { --bg:#f7f8fa; --panel:#ffffff; --text:#0f1720; --muted:#475569; --card:#ffffff; --border:#e5e7eb; --shadow:0 8px 24px rgba(2,6,23,.08); }
+    @media (prefers-color-scheme: light){
+      :root{ --bg:#f6f8fb; --ink:#0f1720; --muted:#566173; --line:#e6e8eb; --panel:#ffffff; --panel2:#ffffff; --brand:#0284c7; }
     }
-    * { box-sizing:border-box; }
-    html, body { margin:0; padding:0; background:var(--bg); color:var(--text); font:16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, Inter, "Helvetica Neue", Arial, Noto Sans, "Apple Color Emoji", "Segoe UI Emoji"; }
-    a { color:var(--primary); text-decoration:none; }
-    .container { max-width:1100px; margin:0 auto; padding:24px; }
-    header { position:sticky; top:0; backdrop-filter:saturate(180%) blur(8px); background:color-mix(in oklab, var(--bg) 85%, transparent); border-bottom:1px solid var(--border); z-index:50; }
-    nav { display:flex; align-items:center; justify-content:space-between; gap:16px; }
-    nav .links a { margin:0 10px; font-weight:600; color:var(--muted); }
-    nav .links a:hover { color:var(--text); }
+    *{box-sizing:border-box}
+    html,body{margin:0; padding:0; background:var(--bg); color:var(--ink); font:16px/1.55 Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial}
+    a{color:var(--brand); text-decoration:none}
 
-    .hero { display:grid; grid-template-columns:1.1fr .9fr; gap:28px; padding:56px 0 24px; align-items:center; }
-    .hero h1 { margin:0 0 10px; font-size:42px; line-height:1.1; letter-spacing:.2px; }
-    .tagline { color:var(--muted); margin-bottom:22px; }
-    .actions { display:flex; gap:12px; flex-wrap:wrap; }
-    .btn { display:inline-flex; align-items:center; gap:10px; padding:12px 16px; border-radius:14px; border:1px solid var(--border); background:var(--panel); color:var(--text); box-shadow:var(--shadow); font-weight:600; }
-    .btn.primary { background:linear-gradient(135deg, var(--primary), #4ade80); color:#0b0d10; border:0; }
-    .btn:hover { transform:translateY(-1px); transition:.15s ease; }
-    .kpis { display:grid; grid-template-columns:repeat(3, 1fr); gap:16px; margin-top:28px; }
-    .card { background:var(--card); border:1px solid var(--border); border-radius:16px; padding:18px; box-shadow:var(--shadow); }
-    .kpis .n { font-size:22px; font-weight:800; }
-    .kpis .d { color:var(--muted); font-size:14px; }
+    .layout{display:grid; grid-template-columns:320px 1fr; min-height:100dvh}
+    @media(max-width:980px){ .layout{grid-template-columns:1fr} }
 
-    section { padding:28px 0; }
-    h2 { font-size:26px; margin:0 0 14px; }
+    /* ==== Sidebar ==== */
+    .sidebar{position:sticky; top:0; align-self:start; height:100dvh; padding:22px; background:var(--panel); border-right:1px solid var(--line)}
+    @media(max-width:980px){ .sidebar{position:static; height:auto; border-right:0; border-bottom:1px solid var(--line)} }
+    .avatar{width:84px; height:84px; border-radius:50%; background:linear-gradient(135deg,var(--brand),var(--accent)); display:inline-block}
+    .name{margin:16px 0 4px; font-size:28px; font-weight:900}
+    .role{color:var(--muted)}
+    .links{display:flex; flex-wrap:wrap; gap:10px; margin:14px 0}
+    .btn{display:inline-flex; align-items:center; gap:8px; padding:10px 14px; border:1px solid var(--line); border-radius:10px; background:var(--panel2); color:var(--ink); font-weight:700}
+    .btn.primary{background:var(--brand); color:#061018; border-color:transparent}
 
-    /* Skills */
-    .chips { display:flex; flex-wrap:wrap; gap:10px; }
-    .chip { padding:8px 12px; border-radius:999px; border:1px solid var(--border); background:var(--panel); color:var(--text); font-weight:600; font-size:14px; }
+    .quick{margin-top:16px}
+    .qrow{display:grid; grid-template-columns:1fr 1fr; gap:10px}
+    .qcard{border:1px solid var(--line); border-radius:12px; padding:10px; background:var(--panel2)}
+    .qcard .n{font-weight:900}
+    .qcard .d{font-size:12px; color:var(--muted)}
 
-    /* Experience */
-    .timeline { position:relative; margin-left:8px; }
-    .timeline::before { content:""; position:absolute; left:14px; top:0; bottom:0; width:2px; background:var(--border); }
-    .item { position:relative; padding-left:44px; margin:18px 0; }
-    .dot { position:absolute; left:8px; top:12px; width:12px; height:12px; border-radius:50%; background:var(--primary); box-shadow:0 0 0 4px color-mix(in oklab, var(--primary) 30%, transparent); }
-    .role { font-weight:800; }
-    .place { color:var(--muted); }
-    .meta { color:var(--muted); font-size:14px; }
-    ul { margin:8px 0 0 18px; }
+    /* ==== Main ==== */
+    main{padding:28px; max-width:980px; margin:0 auto}
+    section{margin:0 0 18px}
+    h2{font-size:13px; letter-spacing:.25px; text-transform:uppercase; color:var(--muted); margin:0 0 10px}
+    .card{background:var(--panel2); border:1px solid var(--line); border-radius:var(--radius); padding:18px; box-shadow:var(--shadow)}
+    .grid{display:grid; gap:14px}
 
-    /* Projects */
-    .grid { display:grid; grid-template-columns:repeat(3, 1fr); gap:16px; }
-    @media (max-width:960px){ .hero{grid-template-columns:1fr;} .grid{grid-template-columns:1fr 1fr;} .kpis{grid-template-columns:1fr 1fr 1fr;} }
-    @media (max-width:680px){ .grid{grid-template-columns:1fr;} .kpis{grid-template-columns:1fr 1fr;} nav .links{display:none;} }
+    .two{display:grid; grid-template-columns:1.2fr .8fr; gap:16px}
+    @media(max-width:980px){ .two{grid-template-columns:1fr} }
 
-    footer { padding:40px 0 60px; color:var(--muted); text-align:center; }
-    .sep { height:1px; background:var(--border); margin:24px 0; }
+    ul{margin:6px 0 0 18px}
+    .meta{font-size:14px; color:var(--muted)}
+
+    .chips{display:flex; flex-wrap:wrap; gap:8px}
+    .chip{padding:6px 10px; border:1px solid var(--line); border-radius:999px; background:transparent; font-weight:700; font-size:13px}
+
+    footer{color:var(--muted); text-align:center; padding:30px 0}
   </style>
 </head>
 <body>
-  <header>
-    <div class="container">
-      <nav>
-        <div style="display:flex;align-items:center;gap:10px;font-weight:900;letter-spacing:.3px">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 12a9 9 0 1 0 18 0A9 9 0 0 0 3 12Zm6.5 0L12 8l2.5 4L12 16l-2.5-4Z" stroke="currentColor"/></svg>
-          Nguyen Nguyen
-        </div>
-        <div class="links">
-          <a href="#about">About</a>
-          <a href="#skills">Skills</a>
-          <a href="#experience">Experience</a>
-          <a href="#projects">Projects</a>
-          <a href="#contact">Contact</a>
-        </div>
+  <div class="layout">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="avatar" aria-hidden="true"></div>
+      <div class="name">Nguyen Nguyen</div>
+      <div class="role">Backend Engineer · Scalable systems, APIs, reliability</div>
+      <nav class="links">
+        <a class="btn primary" href="#contact">Contact</a>
+        <a class="btn" href="./Nguyen-Nguyen-CV.html" download>Download CV</a>
       </nav>
-    </div>
-  </header>
-
-  <main class="container">
-    <section class="hero" id="about">
-      <div>
-        <h1>Backend Engineer crafting scalable, reliable systems</h1>
-        <p class="tagline">7+ years building high‑performance backends. Currently at <strong>Ahamove</strong> where I design, develop and maintain the <strong>service order core</strong> powering key business workflows across the platform.</p>
-        <div class="actions">
-          <a class="btn primary" href="#contact" aria-label="Get in touch">Get in touch</a>
-          <a class="btn" href="https://github.com/nguyennm96" target="_blank" rel="noreferrer">GitHub</a>
-          <a class="btn" href="https://www.linkedin.com/in/nguyennm-work/" target="_blank" rel="noreferrer">LinkedIn</a>
+      <div class="quick">
+        <div class="qrow">
+          <div class="qcard"><div class="n">200K–300K+</div><div class="d">txns/day</div></div>
+          <div class="qcard"><div class="n">&lt;100ms</div><div class="d">P99 promo API</div></div>
         </div>
-        <div class="kpis">
-          <div class="card">
-            <div class="n">200K–300K+/day</div>
-            <div class="d">Payment transactions handled</div>
-          </div>
-          <div class="card">
-            <div class="n">&lt;100ms P99</div>
-            <div class="d">Promo API latency target achieved</div>
-          </div>
-          <div class="card">
-            <div class="n">99.5%</div>
-            <div class="d">Transaction success rate (COD solution)</div>
-          </div>
+        <div class="qrow" style="margin-top:10px">
+          <div class="qcard"><div class="n">99.5%</div><div class="d">COD success</div></div>
+          <div class="qcard"><div class="n">40+</div><div class="d">promo conditions</div></div>
         </div>
       </div>
-      <div>
-        <div class="card">
-          <h2 style="margin-top:0">What I do</h2>
-          <p>I focus on <strong>clean architecture</strong>, <strong>API design</strong>, and <strong>system performance</strong>. Comfortable leading end‑to‑end delivery, mentoring, and improving reliability under real‑world load.</p>
-          <div class="sep"></div>
-          <p style="margin:0"><strong>Primary stack:</strong> Golang, PostgreSQL, MongoDB, Redis, Docker, Kubernetes, AWS • REST/gRPC • DDD • Microservices • Kafka/RabbitMQ • Prometheus/Grafana • ELK • CI/CD</p>
+      <section style="margin-top:18px">
+        <h2>Core Skills</h2>
+        <div class="chips">
+          <span class="chip">Golang</span><span class="chip">Python</span>
+          <span class="chip">PostgreSQL</span><span class="chip">MongoDB</span><span class="chip">Redis</span>
+          <span class="chip">REST</span><span class="chip">gRPC</span><span class="chip">DDD</span><span class="chip">Microservices</span>
+          <span class="chip">Kafka</span><span class="chip">RabbitMQ</span>
+          <span class="chip">Docker</span><span class="chip">Kubernetes</span><span class="chip">AWS</span>
+          <span class="chip">Prometheus</span><span class="chip">Grafana</span><span class="chip">ELK</span>
         </div>
-      </div>
-    </section>
+      </section>
+      <section style="margin-top:18px">
+        <h2>Links</h2>
+        <p><a href="mailto:your.email@domain.com">your.email@domain.com</a></p>
+        <p><a href="https://github.com/nguyennm96" target="_blank" rel="noreferrer">github.com/nguyennm96</a></p>
+        <p><a href="https://www.linkedin.com/in/nguyennm-work/" target="_blank" rel="noreferrer">linkedin.com/in/nguyennm-work</a></p>
+      </section>
+    </aside>
 
-    <section id="skills">
-      <h2>Skills Summary</h2>
-      <div class="chips">
-        <span class="chip">Golang</span>
-        <span class="chip">Python</span>
-        <span class="chip">PostgreSQL</span>
-        <span class="chip">MongoDB</span>
-        <span class="chip">Redis</span>
-        <span class="chip">RESTful APIs</span>
-        <span class="chip">gRPC</span>
-        <span class="chip">Clean Architecture</span>
-        <span class="chip">DDD</span>
-        <span class="chip">Microservices</span>
-        <span class="chip">Kafka</span>
-        <span class="chip">RabbitMQ</span>
-        <span class="chip">Docker</span>
-        <span class="chip">Kubernetes</span>
-        <span class="chip">AWS</span>
-        <span class="chip">Prometheus</span>
-        <span class="chip">Grafana</span>
-        <span class="chip">ELK</span>
-        <span class="chip">Git</span>
-        <span class="chip">GitLab CI</span>
-        <span class="chip">Postman</span>
-        <span class="chip">Swagger</span>
-        <span class="chip">k6</span>
-      </div>
-    </section>
+    <!-- Main -->
+    <main>
+      <section class="card">
+        <p>7+ years building high‑performance backends. At <strong>Ahamove</strong>, I design, develop, and maintain the <strong>service order core</strong> powering platform workflows. I focus on clean architecture, API design, and system performance.</p>
+      </section>
 
-    <section id="experience">
-      <h2>Experience</h2>
-      <div class="timeline">
-        <div class="item card">
-          <div class="dot" aria-hidden="true"></div>
-          <div class="role">Assistant Team Lead · Ahamove</div>
-          <div class="meta">Oct 2023 – Present · Ho Chi Minh City, Vietnam · On‑site</div>
-          <ul>
-            <li>Small team management while owning the <strong>service order core</strong> powering platform workflows.</li>
-            <li>Mentored engineers, enforced code quality, observability, and incident response practices.</li>
-          </ul>
-        </div>
-        <div class="item card">
-          <div class="dot" aria-hidden="true"></div>
-          <div class="role">Senior Backend Engineer · Ahamove</div>
-          <div class="meta">Apr 2022 – Nov 2023</div>
-          <p class="place">Tech: Golang, PostgreSQL, MongoDB, Redis, Docker, Kubernetes, AWS</p>
-          <ul>
-            <li>Led migration from monolith to microservices (scale from 1 → 40+ services).</li>
-            <li>Took ownership of <strong>Promotion</strong> and <strong>Payment</strong> services.</li>
-          </ul>
-          <p style="margin:.6rem 0 .2rem; font-weight:700">Promotion Service</p>
-          <ul>
-            <li>Designed & maintained complex promo logic with <strong>40+ conditions</strong>.</li>
-            <li>Achieved <strong>&lt;100ms P99</strong> API latency and <strong>81% unit test coverage</strong>.</li>
-          </ul>
-          <p style="margin:.6rem 0 .2rem; font-weight:700">Payment Service</p>
-          <ul>
-            <li>Handled <strong>200K–300K daily transactions</strong> totaling 25–35B VND/day.</li>
-            <li>Integrated with top e‑wallets (VNPAY, MoMo, ZaloPay, etc.), reducing partner error‑handling time.</li>
-            <li>Built COD drop‑point solution serving ~<strong>120K orders/day</strong> with <strong>99.5% success rate</strong>.</li>
-          </ul>
-        </div>
-        <div class="item card">
-          <div class="dot" aria-hidden="true"></div>
-          <div class="role">Backend Engineer · Ahamove</div>
-          <div class="meta">Aug 2019 – Mar 2022</div>
-          <ul>
-            <li>Contributed across services during the microservices transition; improved reliability and performance.</li>
-          </ul>
-        </div>
-        <div class="item card">
-          <div class="dot" aria-hidden="true"></div>
-          <div class="role">Software Engineer · Cloudjet Solutions</div>
-          <div class="meta">May 2018 – Aug 2019 · Ho Chi Minh City, Vietnam</div>
-          <p class="place">Tech: Python, Vue.js, PostgreSQL</p>
-          <ul>
-            <li>Designed & developed APIs and DB schemas for KPI evaluation on the Cloudjet KPI platform.</li>
-            <li>Reviewed & optimized business logic, reducing KPI processing time by ~14% for 3,000+ employees at EVNGENCO3.</li>
-            <li>Implemented unit & integration testing, lifting test coverage from 0% → 91%.</li>
-          </ul>
-        </div>
-      </div>
-    </section>
+      <section class="two">
+        <section class="grid">
+          <article class="card">
+            <h2>Experience</h2>
+            <div>
+              <strong>Assistant Team Lead – Ahamove</strong> <span class="meta">Oct 2023 – Present · HCMC</span>
+              <ul>
+                <li>Own the <strong>service order core</strong>; manage a small team.</li>
+                <li>Mentor engineers; drive code quality, SLOs, and incident response.</li>
+              </ul>
+            </div>
+            <div>
+              <strong>Senior Backend Engineer – Ahamove</strong> <span class="meta">Apr 2022 – Nov 2023</span>
+              <div class="meta">Golang · PostgreSQL · MongoDB · Redis · Docker · Kubernetes · AWS</div>
+              <ul>
+                <li>Led monolith → microservices (1 → 40+ services).</li>
+                <li>Owned <strong>Promotion</strong> & <strong>Payment</strong> services.</li>
+              </ul>
+              <div><em>Promotion Service</em></div>
+              <ul>
+                <li>Rule engine with <strong>40+ conditions</strong>; <strong>&lt;100ms P99</strong>; <strong>81% unit tests</strong>.</li>
+              </ul>
+              <div><em>Payment Service</em></div>
+              <ul>
+                <li><strong>200K–300K</strong> daily txns (25–35B VND/day); e‑wallet integrations.</li>
+                <li>COD drop‑point: ~<strong>120K orders/day</strong>, <strong>99.5% success</strong>.</li>
+              </ul>
+            </div>
+            <div>
+              <strong>Backend Engineer – Ahamove</strong> <span class="meta">Aug 2019 – Mar 2022</span>
+              <ul><li>Improved reliability & performance during microservices transition.</li></ul>
+            </div>
+            <div>
+              <strong>Software Engineer – Cloudjet Solutions</strong> <span class="meta">May 2018 – Aug 2019 · HCMC</span>
+              <div class="meta">Python · Vue.js · PostgreSQL</div>
+              <ul>
+                <li>APIs & DB schemas for KPI evaluation platform.</li>
+                <li>~14% faster processing for 3,000+ employees (EVNGENCO3).</li>
+                <li>Raised test coverage from 0% → 91%.</li>
+              </ul>
+            </div>
+          </article>
 
-    <section id="projects">
-      <h2>Selected Projects</h2>
-      <div class="grid">
-        <article class="card">
-          <h3 style="margin-top:0">Promotion Service Engine</h3>
-          <p>Flexible rule engine supporting 40+ promotion conditions, sub‑second P99 latency under peak traffic, and strong unit test coverage.</p>
-          <p class="meta">Golang · Redis · PostgreSQL · gRPC</p>
-        </article>
-        <article class="card">
-          <h3 style="margin-top:0">Payment Platform @ Scale</h3>
-          <p>Processed 200K–300K daily transactions (25–35B VND/day), integrated with VNPAY, MoMo, ZaloPay; streamlined partner issue handling.</p>
-          <p class="meta">Golang · Kafka/RabbitMQ · PostgreSQL · MongoDB</p>
-        </article>
-        <article class="card">
-          <h3 style="margin-top:0">COD Drop‑Point Solution</h3>
-          <p>Drop‑by‑drop point workflow serving ~120K orders/day with 99.5% success rate, improving cash collection and reconciliation.</p>
-          <p class="meta">Golang · Microservices · Kubernetes · AWS</p>
-        </article>
-      </div>
-    </section>
+          <article class="card">
+            <h2>Selected Projects</h2>
+            <ul>
+              <li><strong>Promotion Service Engine</strong> — 40+ promo conditions; sub‑100ms P99. <span class="meta">Golang · Redis · PostgreSQL · gRPC</span></li>
+              <li><strong>Payment Platform @ Scale</strong> — 200K–300K daily txns; 25–35B VND/day. <span class="meta">Golang · Kafka/RabbitMQ · PostgreSQL · MongoDB</span></li>
+              <li><strong>COD Drop‑Point Solution</strong> — ~120K orders/day; 99.5% success. <span class="meta">Golang · Microservices · Kubernetes · AWS</span></li>
+            </ul>
+          </article>
+        </section>
 
-    <section id="contact">
-      <h2>Contact</h2>
-      <div class="card">
-        <p>If you’d like to chat about backend roles, system design, or collaboration, feel free to reach out.</p>
-        <div class="actions">
-          <a class="btn" href="mailto:your.email@domain.com">Email</a>
-          <a class="btn" target="_blank" rel="noreferrer" href="https://github.com/nguyennm96">GitHub</a>
-          <a class="btn" target="_blank" rel="noreferrer" href="https://www.linkedin.com/in/nguyennm-work/">LinkedIn</a>
-        </div>
-      </div>
-    </section>
+        <aside class="grid">
+          <section class="card">
+            <h2>Primary Stack</h2>
+            <div class="chips">
+              <span class="chip">Golang</span><span class="chip">PostgreSQL</span><span class="chip">MongoDB</span><span class="chip">Redis</span>
+              <span class="chip">Docker</span><span class="chip">Kubernetes</span><span class="chip">AWS</span>
+              <span class="chip">REST</span><span class="chip">gRPC</span><span class="chip">DDD</span>
+              <span class="chip">Kafka</span><span class="chip">RabbitMQ</span>
+              <span class="chip">Prometheus</span><span class="chip">Grafana</span><span class="chip">ELK</span>
+            </div>
+          </section>
 
-    <footer>
-      <div class="sep"></div>
-      <div>© <span id="y"></span> Nguyen Nguyen · Built with vanilla HTML/CSS · Hosted on GitHub Pages</div>
-    </footer>
-  </main>
+          <section class="card" id="contact">
+            <h2>Contact</h2>
+            <p>Email: <a href="mailto:your.email@domain.com">your.email@domain.com</a></p>
+            <p><a href="./Nguyen-Nguyen-CV.html" download>Download CV (HTML/PDF)</a></p>
+            <p><a href="https://github.com/nguyennm96" target="_blank" rel="noreferrer">GitHub</a> · <a href="https://www.linkedin.com/in/nguyennm-work/" target="_blank" rel="noreferrer">LinkedIn</a></p>
+          </section>
+        </aside>
+      </section>
+
+      <footer>
+        © <span id="year"></span> Nguyen Nguyen
+      </footer>
+    </main>
+  </div>
 
   <script>
-    document.getElementById('y').textContent = new Date().getFullYear();
-    // Smooth scroll for in-page links
-    document.querySelectorAll('a[href^="#"]').forEach(a=>{
-      a.addEventListener('click',e=>{ const id=a.getAttribute('href'); if(id.length>1){ e.preventDefault(); document.querySelector(id).scrollIntoView({behavior:'smooth'});} });
-    });
-  </script>
-
-  <!-- JSON-LD for richer preview -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "Nguyen Nguyen",
-    "jobTitle": "Backend Engineer",
-    "url": "https://nguyennm96.github.io",
-    "sameAs": [
-      "https://github.com/nguyennm96",
-      "https://www.linkedin.com/in/nguyennm-work/"
-    ],
-    "knowsAbout": ["Golang","Microservices","PostgreSQL","MongoDB","Redis","Kubernetes","AWS","Kafka","RabbitMQ"],
-    "worksFor": {"@type": "Organization", "name": "Ahamove"}
-  }
+    document.getElementById('year').textContent = new Date().getFullYear();
   </script>
 </body>
 </html>
