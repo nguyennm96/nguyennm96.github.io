@@ -1,189 +1,361 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="auto">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Nguyen Nguyen – Backend Engineer</title>
-  <meta name="description" content="Backend Engineer focused on scalable systems, APIs, reliability. Golang · PostgreSQL · MongoDB · Redis · Kubernetes · AWS." />
+  <title>Your Name – Backend Engineer</title>
+  <meta name="description" content="Minimal, professional portfolio template for Backend Engineers. Clean layout. Light/Dark toggle. Responsive." />
   <style>
-    /* ===== Sidebar Pro: clean, hiring‑manager friendly ===== */
+    /* ===============================
+       OPTION B — Minimal, clean layout with Light/Dark toggle
+       + tasteful animations, icons & micro‑interactions
+       =============================== */
     :root{
-      --bg:#0a0c10; --ink:#e6edf3; --muted:#9aa4b2; --line:#1f232a; --panel:#0f1318; --panel2:#0c1015; --brand:#3dc9ff; --accent:#8bdf9b;
-      --radius:14px; --shadow:0 10px 24px rgba(0,0,0,.35);
+      color-scheme: light dark; /* hint browsers */
+      /* Light palette */
+      --bg:#ffffff; --text:#0f1720; --muted:#64748b; --line:#e5e7eb; --card:#ffffff; --brand:#0ea5e9;
+      --chip:#f3f4f6; --shadow:0 2px 20px rgba(2,6,23,.06);
+      --radius:14px; --container:1060px;
+      --ease:cubic-bezier(.22,.61,.36,1);
+      --duration:280ms;
     }
-    @media (prefers-color-scheme: light){
-      :root{ --bg:#f6f8fb; --ink:#0f1720; --muted:#566173; --line:#e6e8eb; --panel:#ffffff; --panel2:#ffffff; --brand:#0284c7; }
+    @media (prefers-color-scheme: dark){
+      :root{ --bg:#0b0f14; --text:#e6edf3; --muted:#9aa4b2; --line:#1f2937; --card:#0e131a; --brand:#38bdf8; --chip:#0b1220; --shadow:0 8px 28px rgba(0,0,0,.35); }
     }
+    /* Explicit theme override via [data-theme] */
+    html[data-theme="light"]{ --bg:#ffffff; --text:#0f1720; --muted:#64748b; --line:#e5e7eb; --card:#ffffff; --brand:#0ea5e9; --chip:#f3f4f6; --shadow:0 2px 20px rgba(2,6,23,.06); }
+    html[data-theme="dark"]{ --bg:#0b0f14; --text:#e6edf3; --muted:#9aa4b2; --line:#1f2937; --card:#0e131a; --brand:#38bdf8; --chip:#0b1220; --shadow:0 8px 28px rgba(0,0,0,.35); }
+
     *{box-sizing:border-box}
-    html,body{margin:0; padding:0; background:var(--bg); color:var(--ink); font:16px/1.55 Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial}
+    html,body{margin:0; padding:0; background:var(--bg); color:var(--text); font:16px/1.6 Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial}
     a{color:var(--brand); text-decoration:none}
+    .container{max-width:var(--container); margin:0 auto; padding:20px}
 
-    .layout{display:grid; grid-template-columns:320px 1fr; min-height:100dvh}
-    @media(max-width:980px){ .layout{grid-template-columns:1fr} }
+    /* Icons */
+    .icon{width:16px; height:16px; vertical-align:-2px; margin-right:8px; flex:0 0 16px}
+    .icon-lg{width:20px; height:20px; vertical-align:-3px; margin-right:8px}
+    .icon-inline{display:inline-flex; align-items:center}
 
-    /* ==== Sidebar ==== */
-    .sidebar{position:sticky; top:0; align-self:start; height:100dvh; padding:22px; background:var(--panel); border-right:1px solid var(--line)}
-    @media(max-width:980px){ .sidebar{position:static; height:auto; border-right:0; border-bottom:1px solid var(--line)} }
-    .avatar{width:84px; height:84px; border-radius:50%; background:linear-gradient(135deg,var(--brand),var(--accent)); display:inline-block}
-    .name{margin:16px 0 4px; font-size:28px; font-weight:900}
-    .role{color:var(--muted)}
-    .links{display:flex; flex-wrap:wrap; gap:10px; margin:14px 0}
-    .btn{display:inline-flex; align-items:center; gap:8px; padding:10px 14px; border:1px solid var(--line); border-radius:10px; background:var(--panel2); color:var(--ink); font-weight:700}
-    .btn.primary{background:var(--brand); color:#061018; border-color:transparent}
+    /* Header */
+    header{position:sticky; top:0; z-index:50; background:rgba(255,255,255,.6); backdrop-filter:saturate(140%) blur(8px); border-bottom:1px solid var(--line)}
+    @media (prefers-color-scheme: dark){ header{ background:rgba(12,18,26,.6); } }
+    .nav{display:flex; align-items:center; justify-content:space-between; gap:14px}
+    .brand{display:flex; align-items:center; gap:10px}
+    .brand .mark{width:28px; height:28px; border-radius:8px; background:conic-gradient(from 0deg, var(--brand), #22c55e, var(--brand)); animation:spin 9s linear infinite; box-shadow:0 0 0 4px color-mix(in oklab, var(--brand) 30%, transparent)}
+    .brand h1{font-size:18px; margin:0}
+    .links{display:flex; align-items:center; gap:16px}
+    .links a{color:var(--muted); font-weight:600; display:inline-flex; align-items:center}
+    .links a:hover{color:var(--text)}
+    .theme-toggle{display:inline-flex; align-items:center; gap:8px; border:1px solid var(--line); background:var(--card); padding:8px 12px; border-radius:10px; font-weight:700; cursor:pointer; transition:transform var(--duration) var(--ease)}
+    .theme-toggle:active{transform:scale(.96) rotate(-2deg)}
 
-    .quick{margin-top:16px}
-    .qrow{display:grid; grid-template-columns:1fr 1fr; gap:10px}
-    .qcard{border:1px solid var(--line); border-radius:12px; padding:10px; background:var(--panel2)}
-    .qcard .n{font-weight:900}
-    .qcard .d{font-size:12px; color:var(--muted)}
+    @keyframes spin{to{transform:rotate(1turn)}}
 
-    /* ==== Main ==== */
-    main{padding:28px; max-width:980px; margin:0 auto}
-    section{margin:0 0 18px}
-    h2{font-size:13px; letter-spacing:.25px; text-transform:uppercase; color:var(--muted); margin:0 0 10px}
-    .card{background:var(--panel2); border:1px solid var(--line); border-radius:var(--radius); padding:18px; box-shadow:var(--shadow)}
-    .grid{display:grid; gap:14px}
+    /* Hero */
+    .hero{position:relative; display:grid; grid-template-columns:1.1fr .9fr; gap:24px; align-items:center; padding:36px 0}
+    @media(max-width:920px){ .hero{grid-template-columns:1fr} }
+    .hero::before{content:""; position:absolute; inset:-10% -20% auto -20%; height:280px; background:radial-gradient(closest-side, color-mix(in oklab, var(--brand) 20%, transparent), transparent 70%); filter:blur(20px); opacity:.6; pointer-events:none; animation:float 12s ease-in-out infinite alternate}
+    @keyframes float{from{transform:translateY(-6px)} to{transform:translateY(6px)}}
 
-    .two{display:grid; grid-template-columns:1.2fr .8fr; gap:16px}
-    @media(max-width:980px){ .two{grid-template-columns:1fr} }
+    .eyebrow{color:var(--muted); font-weight:700; text-transform:uppercase; letter-spacing:.18em; font-size:12px}
+    h2.title{font-size:40px; line-height:1.1; margin:6px 0 12px}
+    .subtitle{color:var(--muted); margin:0 0 16px}
+    .cta{display:flex; gap:10px; flex-wrap:wrap}
+    .btn{position:relative; overflow:hidden; display:inline-flex; align-items:center; gap:10px; padding:10px 14px; border:1px solid var(--line); border-radius:12px; background:var(--card); box-shadow:var(--shadow); font-weight:700; transition:transform var(--duration) var(--ease), box-shadow var(--duration) var(--ease)}
+    .btn:hover{transform:translateY(-2px)}
+    .btn.primary{background:var(--brand); color:#06141d; border-color:transparent}
+    .btn .ripple{position:absolute; border-radius:50%; transform:scale(0); opacity:.35; background:#fff; pointer-events:none; animation:ripple .8s var(--ease)}
+    @keyframes ripple{to{transform:scale(18); opacity:0}}
 
-    ul{margin:6px 0 0 18px}
-    .meta{font-size:14px; color:var(--muted)}
+    /* KPI row */
+    .kpis{display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-top:10px}
+    @media(max-width:720px){ .kpis{grid-template-columns:1fr 1fr} }
+    .kpi{border:1px solid var(--line); border-radius:12px; padding:12px; background:var(--card); transition:transform var(--duration) var(--ease); display:grid; grid-template-columns:auto 1fr; gap:10px; align-items:center}
+    .kpi:hover{transform:translateY(-2px)}
+    .kpi .d{color:var(--muted); font-size:13px}
+    .kpi .n{font-weight:900; font-size:20px}
 
+    /* Sections */
+    section{padding:18px 0}
+    h3{font-size:14px; text-transform:uppercase; letter-spacing:.12em; color:var(--muted); margin:0 0 10px}
+    .card{border:1px solid var(--line); border-radius:var(--radius); background:var(--card); padding:18px; transition:border-color var(--duration) var(--ease), transform var(--duration) var(--ease)}
+    .card:hover{transform:translateY(-2px)}
+
+    /* Skills chips */
     .chips{display:flex; flex-wrap:wrap; gap:8px}
-    .chip{padding:6px 10px; border:1px solid var(--line); border-radius:999px; background:transparent; font-weight:700; font-size:13px}
+    .chip{display:inline-flex; align-items:center; gap:8px; padding:6px 10px; border:1px solid var(--line); border-radius:999px; background:var(--chip); font-weight:700; font-size:13px; transition:transform var(--duration) var(--ease)}
+    .chip:hover{transform:translateY(-1px) scale(1.03)}
+
+    /* Case studies */
+    .grid{display:grid; grid-template-columns:repeat(2,1fr); gap:12px}
+    @media(max-width:920px){ .grid{grid-template-columns:1fr} }
+    .case h4{margin:0 0 6px; display:flex; gap:8px; align-items:center}
+    .case .meta{color:var(--muted); font-size:13px}
+
+    /* Experience list */
+    .exp li{margin:6px 0}
+
+    /* Contact */
+    .contact{display:grid; grid-template-columns:1.1fr .9fr; gap:12px}
+    @media(max-width:920px){ .contact{grid-template-columns:1fr} }
+
+    /* Reveal on scroll */
+    .reveal{opacity:0; transform:translateY(8px); transition:opacity var(--duration) var(--ease), transform var(--duration) var(--ease)}
+    .reveal.in{opacity:1; transform:none}
+
+    /* Respect reduced motion */
+    @media (prefers-reduced-motion: reduce){
+      *{animation:none !important; transition:none !important}
+    }
 
     footer{color:var(--muted); text-align:center; padding:30px 0}
   </style>
 </head>
 <body>
-  <div class="layout">
-    <!-- Sidebar -->
-    <aside class="sidebar">
-      <div class="avatar" aria-hidden="true"></div>
-      <div class="name">Nguyen Nguyen</div>
-      <div class="role">Backend Engineer · Scalable systems, APIs, reliability</div>
+  <!-- SVG Icon Sprite -->
+  <svg aria-hidden="true" style="position:absolute; width:0; height:0; overflow:hidden">
+    <symbol id="i-user" viewBox="0 0 24 24"><path fill="currentColor" d="M12 12a5 5 0 1 0-5-5 5 5 0 0 0 5 5Zm0 2c-4.42 0-8 2.24-8 5v1h16v-1c0-2.76-3.58-5-8-5Z"/></symbol>
+    <symbol id="i-bolt" viewBox="0 0 24 24"><path fill="currentColor" d="M13 2 3 14h7l-1 8 10-12h-7l1-8Z"/></symbol>
+    <symbol id="i-briefcase" viewBox="0 0 24 24"><path fill="currentColor" d="M9 6V4h6v2h4a2 2 0 0 1 2 2v3H2V8a2 2 0 0 1 2-2h5Zm13 6v6a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-6h7v1h6v-1h7Z"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24"><path fill="currentColor" d="M2 6a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v.4l-10 6-10-6V6Zm0 2.5V18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8.5l-9.4 5.64a2 2 0 0 1-2.2 0L2 8.5Z"/></symbol>
+    <symbol id="i-chart" viewBox="0 0 24 24"><path fill="currentColor" d="M4 3h2v18H4V3Zm14 7h2v11h-2V10ZM9 13h2v8H9v-8Zm5-6h2v14h-2V7Z"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2Zm1 5h-2v6l5 3 1-1-4-2V7Z"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2 4 5v6c0 5 3.4 9.4 8 11 4.6-1.6 8-6 8-11V5l-8-3Z"/></symbol>
+    <symbol id="i-link" viewBox="0 0 24 24"><path fill="currentColor" d="M3.9 12a5 5 0 0 1 5-5h3v2h-3a3 3 0 1 0 0 6h3v2h-3a5 5 0 0 1-5-5Zm7-3h2v2h-2Zm8.2-2a5 5 0 0 0-3.5-1.5H12v2h3.6a3 3 0 1 1 0 6H12v2h3.6a5 5 0 0 0 3.5-8.5Z"/></symbol>
+    <symbol id="i-database" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2C7 2 3 3.8 3 6s4 4 9 4 9-1.8 9-4-4-4-9-4Zm9 7c0 2.2-4 4-9 4S3 11.2 3 9v4c0 2.2 4 4 9 4s9-1.8 9-4V9Zm0 6c0 2.2-4 4-9 4s-9-1.8-9-4v3c0 2.2 4 4 9 4s9-1.8 9-4v-3Z"/></symbol>
+    <symbol id="i-queue" viewBox="0 0 24 24"><path fill="currentColor" d="M3 5h18v2H3V5Zm0 6h12v2H3v-2Zm0 6h8v2H3v-2Z"/></symbol>
+    <symbol id="i-container" viewBox="0 0 24 24"><path fill="currentColor" d="M4 6h16v12H4V6Zm3 0v12m3-12v12m3-12v12m3-12v12"/></symbol>
+    <symbol id="i-cloud" viewBox="0 0 24 24"><path fill="currentColor" d="M19 18a4 4 0 0 0 0-8 5.5 5.5 0 0 0-10.6-2A4.5 4.5 0 0 0 5 18h14Z"/></symbol>
+    <symbol id="i-grid" viewBox="0 0 24 24"><path fill="currentColor" d="M3 3h8v8H3V3Zm10 0h8v8h-8V3ZM3 13h8v8H3v-8Zm10 0h8v8h-8v-8Z"/></symbol>
+    <symbol id="i-code" viewBox="0 0 24 24"><path fill="currentColor" d="M9 7 3 12l6 5 1.4-1.4L6 12l4.4-3.6L9 7Zm6 0-1.4 1.4L18 12l-4.4 3.6L15 17l6-5-6-5Z"/></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24"><path fill="currentColor" d="M12 7a5 5 0 1 0 5 5 5 5 0 0 0-5-5Zm0-5h2v3h-2V2Zm0 20h2v3h-2v-3ZM2 12h3v2H2v-2Zm17 0h3v2h-3v-2ZM4.2 4.2 5.6 5.6 3.5 7.7 2.1 6.3 4.2 4.2Zm14.2 14.2 1.4 1.4-2.1 2.1-1.4-1.4 2.1-2.1Z"/></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a9.9 9.9 0 1 0 8.6 15.3A9 9 0 0 1 12 2Z"/></symbol>
+    <symbol id="i-auto" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2 2 12l10 10 10-10L12 2Zm0 5 5 5-5 5-5-5 5-5Z"/></symbol>
+  </svg>
+
+  <header class="reveal">
+    <div class="container nav">
+      <div class="brand"><div class="mark" aria-hidden="true"></div><h1>Your Name</h1></div>
       <nav class="links">
-        <a class="btn primary" href="#contact">Contact</a>
-        <a class="btn" href="./Nguyen-Nguyen-CV.html" download>Download CV</a>
+        <a href="#about" class="icon-inline"><svg class="icon"><use href="#i-user"/></svg>About</a>
+        <a href="#skills" class="icon-inline"><svg class="icon"><use href="#i-bolt"/></svg>Skills</a>
+        <a href="#work" class="icon-inline"><svg class="icon"><use href="#i-briefcase"/></svg>Case Studies</a>
+        <a href="#experience" class="icon-inline"><svg class="icon"><use href="#i-chart"/></svg>Experience</a>
+        <a href="#contact" class="icon-inline"><svg class="icon"><use href="#i-mail"/></svg>Contact</a>
+        <button class="theme-toggle" id="themeBtn" aria-label="Toggle theme"><svg class="icon" id="themeIcon"><use href="#i-auto"/></svg><span id="themeLabel">Auto</span></button>
       </nav>
-      <div class="quick">
-        <div class="qrow">
-          <div class="qcard"><div class="n">200K–300K+</div><div class="d">txns/day</div></div>
-          <div class="qcard"><div class="n">&lt;100ms</div><div class="d">P99 promo API</div></div>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- HERO -->
+    <section id="about" class="hero reveal">
+      <div>
+        <div class="eyebrow">Backend Engineer</div>
+        <h2 class="title">I build reliable, low‑latency backends.</h2>
+        <p class="subtitle">One line about your value. Example: “I design clean architectures and resilient APIs that stay fast at scale.” Replace with your own.</p>
+        <div class="cta">
+          <a class="btn primary js-ripple js-confetti" href="#contact"><svg class="icon"><use href="#i-mail"/></svg>Get in touch</a>
+          <a class="btn js-ripple" href="#" download><svg class="icon"><use href="#i-briefcase"/></svg>Download Resume</a>
         </div>
-        <div class="qrow" style="margin-top:10px">
-          <div class="qcard"><div class="n">99.5%</div><div class="d">COD success</div></div>
-          <div class="qcard"><div class="n">40+</div><div class="d">promo conditions</div></div>
+        <div class="kpis">
+          <div class="kpi"><svg class="icon-lg"><use href="#i-chart"/></svg><div><div class="d">Requests/day</div><div class="n" data-count="250000" data-suffix= "+">0</div></div></div>
+          <div class="kpi"><svg class="icon-lg"><use href="#i-clock"/></svg><div><div class="d">P99 latency</div><div class="n" data-count="100" data-prefix="<" data-suffix=" ms">0</div></div></div>
+          <div class="kpi"><svg class="icon-lg"><use href="#i-shield"/></svg><div><div class="d">Uptime / SLO</div><div class="n" data-count="99.9" data-suffix="%">0</div></div></div>
         </div>
       </div>
-      <section style="margin-top:18px">
-        <h2>Core Skills</h2>
+      <div class="card">
+        <h3><span class="icon-inline"><svg class="icon"><use href="#i-bolt"/></svg>Focus</span></h3>
+        <p>Write 2–3 sentences about what you focus on (e.g., API design, observability, DDD, microservices). Keep it crisp and concrete.</p>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills" class="reveal">
+      <h3>Skills</h3>
+      <div class="card">
         <div class="chips">
-          <span class="chip">Golang</span><span class="chip">Python</span>
-          <span class="chip">PostgreSQL</span><span class="chip">MongoDB</span><span class="chip">Redis</span>
-          <span class="chip">REST</span><span class="chip">gRPC</span><span class="chip">DDD</span><span class="chip">Microservices</span>
-          <span class="chip">Kafka</span><span class="chip">RabbitMQ</span>
-          <span class="chip">Docker</span><span class="chip">Kubernetes</span><span class="chip">AWS</span>
-          <span class="chip">Prometheus</span><span class="chip">Grafana</span><span class="chip">ELK</span>
+          <span class="chip"><svg class="icon"><use href="#i-code"/></svg>Language / Go</span>
+          <span class="chip"><svg class="icon"><use href="#i-code"/></svg>Python</span>
+          <span class="chip"><svg class="icon"><use href="#i-database"/></svg>PostgreSQL</span>
+          <span class="chip"><svg class="icon"><use href="#i-database"/></svg>MongoDB</span>
+          <span class="chip"><svg class="icon"><use href="#i-database"/></svg>Redis</span>
+          <span class="chip"><svg class="icon"><use href="#i-link"/></svg>REST</span>
+          <span class="chip"><svg class="icon"><use href="#i-link"/></svg>gRPC</span>
+          <span class="chip"><svg class="icon"><use href="#i-grid"/></svg>DDD</span>
+          <span class="chip"><svg class="icon"><use href="#i-grid"/></svg>Microservices</span>
+          <span class="chip"><svg class="icon"><use href="#i-queue"/></svg>Kafka</span>
+          <span class="chip"><svg class="icon"><use href="#i-queue"/></svg>RabbitMQ</span>
+          <span class="chip"><svg class="icon"><use href="#i-container"/></svg>Docker</span>
+          <span class="chip"><svg class="icon"><use href="#i-grid"/></svg>Kubernetes</span>
+          <span class="chip"><svg class="icon"><use href="#i-cloud"/></svg>AWS</span>
+          <span class="chip"><svg class="icon"><use href="#i-chart"/></svg>Prometheus</span>
+          <span class="chip"><svg class="icon"><use href="#i-chart"/></svg>Grafana</span>
+          <span class="chip"><svg class="icon"><use href="#i-chart"/></svg>ELK</span>
         </div>
-      </section>
-      <section style="margin-top:18px">
-        <h2>Links</h2>
-        <p><a href="mailto:your.email@domain.com">your.email@domain.com</a></p>
-        <p><a href="https://github.com/nguyennm96" target="_blank" rel="noreferrer">github.com/nguyennm96</a></p>
-        <p><a href="https://www.linkedin.com/in/nguyennm-work/" target="_blank" rel="noreferrer">linkedin.com/in/nguyennm-work</a></p>
-      </section>
-    </aside>
+      </div>
+    </section>
 
-    <!-- Main -->
-    <main>
-      <section class="card">
-        <p>7+ years building high‑performance backends. At <strong>Ahamove</strong>, I design, develop, and maintain the <strong>service order core</strong> powering platform workflows. I focus on clean architecture, API design, and system performance.</p>
-      </section>
+    <!-- CASE STUDIES -->
+    <section id="work" class="reveal">
+      <h3>Case Studies</h3>
+      <div class="grid">
+        <article class="card case">
+          <h4><svg class="icon"><use href="#i-briefcase"/></svg>Project / Service Name</h4>
+          <div class="meta">Role · Year</div>
+          <p><strong>Problem:</strong> Brief description of the business/system problem.</p>
+          <p><strong>Approach:</strong> Architecture decisions, data flow, patterns, trade‑offs.</p>
+          <p><strong>Impact:</strong> Metrics: latency, throughput, success rate, cost, developer velocity.</p>
+        </article>
+        <article class="card case">
+          <h4><svg class="icon"><use href="#i-briefcase"/></svg>Platform Modernization</h4>
+          <div class="meta">Role · Year</div>
+          <p><strong>Problem:</strong> Legacy monolith constrained scalability and delivery speed.</p>
+          <p><strong>Approach:</strong> Defined domains, split services, added messaging, observability, CI/CD.</p>
+          <p><strong>Impact:</strong> Services ×N, P99 ↓, deploys/day ↑, incidents ↓.</p>
+        </article>
+      </div>
+    </section>
 
-      <section class="two">
-        <section class="grid">
-          <article class="card">
-            <h2>Experience</h2>
-            <div>
-              <strong>Assistant Team Lead – Ahamove</strong> <span class="meta">Oct 2023 – Present · HCMC</span>
-              <ul>
-                <li>Own the <strong>service order core</strong>; manage a small team.</li>
-                <li>Mentor engineers; drive code quality, SLOs, and incident response.</li>
-              </ul>
-            </div>
-            <div>
-              <strong>Senior Backend Engineer – Ahamove</strong> <span class="meta">Apr 2022 – Nov 2023</span>
-              <div class="meta">Golang · PostgreSQL · MongoDB · Redis · Docker · Kubernetes · AWS</div>
-              <ul>
-                <li>Led monolith → microservices (1 → 40+ services).</li>
-                <li>Owned <strong>Promotion</strong> & <strong>Payment</strong> services.</li>
-              </ul>
-              <div><em>Promotion Service</em></div>
-              <ul>
-                <li>Rule engine with <strong>40+ conditions</strong>; <strong>&lt;100ms P99</strong>; <strong>81% unit tests</strong>.</li>
-              </ul>
-              <div><em>Payment Service</em></div>
-              <ul>
-                <li><strong>200K–300K</strong> daily txns (25–35B VND/day); e‑wallet integrations.</li>
-                <li>COD drop‑point: ~<strong>120K orders/day</strong>, <strong>99.5% success</strong>.</li>
-              </ul>
-            </div>
-            <div>
-              <strong>Backend Engineer – Ahamove</strong> <span class="meta">Aug 2019 – Mar 2022</span>
-              <ul><li>Improved reliability & performance during microservices transition.</li></ul>
-            </div>
-            <div>
-              <strong>Software Engineer – Cloudjet Solutions</strong> <span class="meta">May 2018 – Aug 2019 · HCMC</span>
-              <div class="meta">Python · Vue.js · PostgreSQL</div>
-              <ul>
-                <li>APIs & DB schemas for KPI evaluation platform.</li>
-                <li>~14% faster processing for 3,000+ employees (EVNGENCO3).</li>
-                <li>Raised test coverage from 0% → 91%.</li>
-              </ul>
-            </div>
-          </article>
-
-          <article class="card">
-            <h2>Selected Projects</h2>
+    <!-- EXPERIENCE -->
+    <section id="experience" class="reveal">
+      <h3>Experience</h3>
+      <div class="card">
+        <ul class="exp">
+          <li><strong>Job Title – Company</strong> · Dates · Location
             <ul>
-              <li><strong>Promotion Service Engine</strong> — 40+ promo conditions; sub‑100ms P99. <span class="meta">Golang · Redis · PostgreSQL · gRPC</span></li>
-              <li><strong>Payment Platform @ Scale</strong> — 200K–300K daily txns; 25–35B VND/day. <span class="meta">Golang · Kafka/RabbitMQ · PostgreSQL · MongoDB</span></li>
-              <li><strong>COD Drop‑Point Solution</strong> — ~120K orders/day; 99.5% success. <span class="meta">Golang · Microservices · Kubernetes · AWS</span></li>
+              <li>Owned service(s); delivered X with impact Y.</li>
+              <li>Improved SLO/latency/cost by N% via Z.</li>
             </ul>
-          </article>
-        </section>
+          </li>
+          <li><strong>Previous Role – Company</strong> · Dates · Location
+            <ul>
+              <li>Migrated monolith → microservices; set up CI/CD & observability.</li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </section>
 
-        <aside class="grid">
-          <section class="card">
-            <h2>Primary Stack</h2>
-            <div class="chips">
-              <span class="chip">Golang</span><span class="chip">PostgreSQL</span><span class="chip">MongoDB</span><span class="chip">Redis</span>
-              <span class="chip">Docker</span><span class="chip">Kubernetes</span><span class="chip">AWS</span>
-              <span class="chip">REST</span><span class="chip">gRPC</span><span class="chip">DDD</span>
-              <span class="chip">Kafka</span><span class="chip">RabbitMQ</span>
-              <span class="chip">Prometheus</span><span class="chip">Grafana</span><span class="chip">ELK</span>
-            </div>
-          </section>
+    <!-- CONTACT -->
+    <section id="contact" class="reveal">
+      <h3>Contact</h3>
+      <div class="contact">
+        <div class="card">
+          <p class="icon-inline"><svg class="icon"><use href="#i-mail"/></svg>Email: <a href="mailto:email@example.com">email@example.com</a></p>
+          <p class="icon-inline"><svg class="icon"><use href="#i-code"/></svg>GitHub: <a href="#" target="_blank" rel="noreferrer">github.com/yourname</a></p>
+          <p class="icon-inline"><svg class="icon"><use href="#i-link"/></svg>LinkedIn: <a href="#" target="_blank" rel="noreferrer">linkedin.com/in/yourname</a></p>
+        </div>
+        <div class="card">
+          <p><a class="btn js-ripple js-confetti" href="#" download><svg class="icon"><use href="#i-briefcase"/></svg>Download Resume (PDF)</a></p>
+          <p class="muted">Tip: export a PDF resume and host it in this repo, then link it here.</p>
+        </div>
+      </div>
+    </section>
+  </main>
 
-          <section class="card" id="contact">
-            <h2>Contact</h2>
-            <p>Email: <a href="mailto:your.email@domain.com">your.email@domain.com</a></p>
-            <p><a href="./Nguyen-Nguyen-CV.html" download>Download CV (HTML/PDF)</a></p>
-            <p><a href="https://github.com/nguyennm96" target="_blank" rel="noreferrer">GitHub</a> · <a href="https://www.linkedin.com/in/nguyennm-work/" target="_blank" rel="noreferrer">LinkedIn</a></p>
-          </section>
-        </aside>
-      </section>
-
-      <footer>
-        © <span id="year"></span> Nguyen Nguyen
-      </footer>
-    </main>
-  </div>
+  <footer>
+    <div class="container" style="text-align:center; color:var(--muted)">© <span id="year"></span> Your Name</div>
+  </footer>
 
   <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
+    // Theme toggle: auto (system) / light / dark
+    const btn = document.getElementById('themeBtn')
+    const themeIcon = document.getElementById('themeIcon')
+    const themeLabel = document.getElementById('themeLabel')
+    const saved = localStorage.getItem('theme') || 'auto'
+    apply(saved)
+
+    btn.addEventListener('click', ()=>{
+      const current = document.documentElement.getAttribute('data-theme') || 'auto'
+      const next = current === 'auto' ? 'light' : (current === 'light' ? 'dark' : 'auto')
+      apply(next)
+      localStorage.setItem('theme', next)
+    })
+
+    function apply(mode){
+      document.documentElement.setAttribute('data-theme', mode)
+      const map = { auto:'#i-auto', light:'#i-sun', dark:'#i-moon' }
+      themeIcon.firstElementChild?.setAttribute('href', map[mode])
+      themeIcon.setAttribute('href', map[mode])
+      themeLabel.textContent = mode.charAt(0).toUpperCase() + mode.slice(1)
+    }
+
+    document.getElementById('year').textContent = new Date().getFullYear()
+
+    // Ripple effect for buttons with .js-ripple
+    document.querySelectorAll('.js-ripple').forEach(el=>{
+      el.addEventListener('click', e => {
+        const r = el.getBoundingClientRect()
+        const d = Math.max(r.width, r.height)
+        const x = e.clientX - r.left - d/2
+        const y = e.clientY - r.top - d/2
+        const span = document.createElement('span')
+        span.className = 'ripple'
+        span.style.width = span.style.height = d+'px'
+        span.style.left = x+'px'
+        span.style.top = y+'px'
+        el.appendChild(span)
+        setTimeout(()=> span.remove(), 800)
+      })
+    })
+
+    // Reveal on scroll
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(({isIntersecting, target})=>{
+        if(isIntersecting){ target.classList.add('in'); io.unobserve(target) }
+      })
+    }, { threshold: .15 })
+    document.querySelectorAll('.reveal').forEach(el=> io.observe(el))
+
+    // KPI count-up when visible
+    const counterIo = new IntersectionObserver((entries)=>{
+      entries.forEach(({isIntersecting, target})=>{
+        if(!isIntersecting || target.dataset.done) return
+        target.dataset.done = '1'
+        const end = Number(target.dataset.count || 0)
+        const prefix = target.dataset.prefix || ''
+        const suffix = target.dataset.suffix || ''
+        const start = 0
+        const t0 = performance.now()
+        const dur = 900
+        const step = (now)=>{
+          const p = Math.min(1, (now - t0)/dur)
+          const val = start + p*(end - start)
+          target.textContent = prefix + (end % 1 ? val.toFixed(1) : Math.floor(val).toLocaleString()) + suffix
+          if(p<1) requestAnimationFrame(step)
+        }
+        requestAnimationFrame(step)
+      })
+    }, { threshold: .6 })
+    document.querySelectorAll('.kpi .n').forEach(el=> counterIo.observe(el))
+
+    // Confetti (fun but lightweight): emoji burst on .js-confetti clicks
+    const confettiEmojis = ["🚀","⚙️","🐳","🧩","🛠️","💾","📦","✨","🧪"]
+    document.querySelectorAll('.js-confetti').forEach(el=>{
+      el.addEventListener('click', (e)=>{
+        if(window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+        for(let i=0;i<12;i++){
+          const span = document.createElement('span')
+          span.textContent = confettiEmojis[Math.floor(Math.random()*confettiEmojis.length)]
+          span.style.position = 'fixed'
+          span.style.left = e.clientX + 'px'
+          span.style.top = e.clientY + 'px'
+          span.style.pointerEvents = 'none'
+          span.style.zIndex = 1000
+          const dx = (Math.random()-.5)*200
+          const dy = (Math.random()-.8)*220 - 60
+          const rot = (Math.random()-.5)*120
+          const dur = 800 + Math.random()*600
+          span.animate([
+            { transform: 'translate(0,0) rotate(0deg)', opacity: 1 },
+            { transform: `translate(${dx}px, ${dy}px) rotate(${rot}deg)`, opacity: 0 }
+          ], { duration: dur, easing: 'cubic-bezier(.22,.61,.36,1)' })
+          document.body.appendChild(span)
+          setTimeout(()=> span.remove(), dur)
+        }
+      })
+    })
   </script>
 </body>
 </html>
